@@ -340,16 +340,13 @@ pg.display.set_caption("Python Tetris")
 
 clock = pg.time.Clock()
 
+
 game = Game()
+GAME_UPDATE = pg.USEREVENT
+pg.time.set_timer(GAME_UPDATE, 200)
 
 async def main():
-    
-    GAME_UPDATE = pg.USEREVENT
-    pg.time.set_timer(GAME_UPDATE, 200)
-
-
-
-
+  
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
