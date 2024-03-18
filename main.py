@@ -1,5 +1,7 @@
-import pygame as pg, sys,asyncio
+import pygame as pg
 import random
+import sys
+import asyncio
 
 
 # Blocks
@@ -138,11 +140,8 @@ class Game:
         self.next_block = self.get_random_block()
         self.game_over= False
         self.score= 0
-        self.rotate_sound = pg.mixer.Sound("Sounds/rotate.ogg")
+       
         self.clear_sound = pg.mixer.Sound("Sounds/tetrisline.ogg")
-        
-        
-        
         
         pg.mixer.music.load("Sounds/tetrisoriginal.ogg")
         volume = 0.3 
@@ -229,8 +228,8 @@ class Game:
         self.current_block.rotate()
         if self.block_inside() == False or self.block_fits() == False:
             self.current_block.undo_rotation()
-        else: 
-            self.rotate_sound.play() 
+        # else: 
+        #     self.rotate_sound.play() 
         
     def block_inside(self):
         tiles = self.current_block.get_cell_positions()    
@@ -340,17 +339,18 @@ pg.display.set_caption("Python Tetris")
 
 clock = pg.time.Clock()
 
-
 game = Game()
-GAME_UPDATE = pg.USEREVENT
-pg.time.set_timer(GAME_UPDATE, 200)
 
 async def main():
-  
+    
+    GAME_UPDATE = pg.USEREVENT
+    pg.time.set_timer(GAME_UPDATE, 200)
+    
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
+       
                 sys.exit()
             if event.type == pg.KEYDOWN:
                 if game.game_over == True:
